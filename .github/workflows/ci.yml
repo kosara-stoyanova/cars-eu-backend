@@ -21,3 +21,17 @@ jobs:
           cd transactions-service
           npm i   
           npm run build
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test Offers service
+        run: |
+          cd offers-service
+          npm i          
+          npm run test
+      - name: Test Transactions service
+        run: |
+          cd transactions-service
+          npm i   
+          npm run test
