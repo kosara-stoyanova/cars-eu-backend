@@ -13,6 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Start the Docker containers
-        run: set NODE_ENV=dev&& docker-compose up
+        run: $env:NODE_ENV = "dev"; docker-compose up
       - name: Stop and remove Docker containers
         run: docker-compose down
