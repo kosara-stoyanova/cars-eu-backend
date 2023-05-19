@@ -21,6 +21,8 @@ jobs:
           cd transactions-service
           npm i   
           npm run build
+      - name: Build docker environment
+        run: docker-compose build
   test:
     runs-on: ubuntu-latest
     steps:
