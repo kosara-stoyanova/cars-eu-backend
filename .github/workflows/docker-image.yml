@@ -2,20 +2,17 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: ["develop"]
   pull_request:
-    branches: [ "develop" ]
+    branches: ["develop"]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Start the Docker containers
-      run: docker-compose up -d
-    - name: Stop and remove Docker containers
-      run: docker-compose down
-      
+      - uses: actions/checkout@v3
+      - name: Start the Docker containers
+        run: set NODE_ENV=dev&& docker-compose up
+      - name: Stop and remove Docker containers
+        run: docker-compose down
