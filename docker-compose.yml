@@ -38,22 +38,22 @@ services:
     networks:
       - carseu-network
 
-  offers-service-1:
-    container_name: offers-service-container-1
-    hostname: offers-service
-    build: ./offers-service
-    ports:
-      - "8084:8081"
-    image: offers-service
-    env_file:
-      - ./offers-service/.env.${NODE_ENV}
-    command: sh -c "npm run ${NODE_ENV}"
-    restart: on-failure
-    # depends_on:
-    #   rabbitmq:
-    #     condition: service_healthy
-    networks:
-      - carseu-network
+  # offers-service-1:
+  #   container_name: offers-service-container-1
+  #   hostname: offers-service
+  #   build: ./offers-service
+  #   ports:
+  #     - "8084:8081"
+  #   image: offers-service
+  #   env_file:
+  #     - ./offers-service/.env.${NODE_ENV}
+  #   command: sh -c "npm run ${NODE_ENV}"
+  #   restart: on-failure
+  #   # depends_on:
+  #   #   rabbitmq:
+  #   #     condition: service_healthy
+  #   networks:
+  #     - carseu-network
 
   transactions-service:
     container_name: transactions-service-container
