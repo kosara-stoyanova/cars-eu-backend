@@ -16,7 +16,8 @@ jobs:
       - name: Set environment variables
         env:
           NODE_ENV: dev
-      - name: Start the Docker containers
         run: docker-compose up
+      # - name: Start the Docker containers
+      #   run: docker-compose up
       - name: Stop and remove Docker containers
         run: docker-compose down
