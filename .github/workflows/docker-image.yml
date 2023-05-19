@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Build the solution
+        run: docker-compose build
       - name: Start the Docker containers
         run: $env:NODE_ENV = "dev"; docker-compose up
       - name: Stop and remove Docker containers
