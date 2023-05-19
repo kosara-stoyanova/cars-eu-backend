@@ -19,4 +19,5 @@ jobs:
       - name: Build Transactions service
         run: |
           cd transactions-service
+          npm i   
           npm run build
