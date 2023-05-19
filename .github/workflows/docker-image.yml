@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: set env vars
-        run: $env:NODE_ENV = "dev"
+        run: echo "NODE_ENV=dev"
       - name: Build the solution
         run: docker-compose build
       - name: Start the Docker containers
