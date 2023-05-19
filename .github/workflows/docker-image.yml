@@ -9,12 +9,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    variables:
+      NODE_ENV: dev
     steps:
       - uses: actions/checkout@v3
       - name: Start the Docker containers
-        run: |
-          NODE_ENV=dev
-          docker-compose up
+        run: docker-compose up
       - name: Stop and remove Docker containers
         run: docker-compose down
