@@ -22,6 +22,8 @@ jobs:
           npm i   
           npm run build
       - name: Build docker environment
+        env:
+          NODE_ENV: dev
         run: docker-compose build
   test:
     runs-on: ubuntu-latest
