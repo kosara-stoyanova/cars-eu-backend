@@ -12,9 +12,9 @@ jobs:
     steps:
       - name: Build Offers service
         run: |
-          cd ./offers-service
+          cd offers-service
           npm run build
       - name: Build Transactions service
         run: |
-          cd ../transactions-service
+          cd transactions-service
           npm run build
