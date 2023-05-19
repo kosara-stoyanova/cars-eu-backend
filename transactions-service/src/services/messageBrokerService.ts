@@ -5,10 +5,10 @@ import { Transaction } from "../models/transactionModel";
 let channel: Channel;
 let connection: Connection;
 
-export const connect = async () => {
+export const connect = async (uri: string) => {
   try {
     // Establish connection to RabbitMQ server
-    connection = await amqplib.connect("amqp://rabbit:5672");
+    connection = await amqplib.connect(uri);
     channel = await connection.createChannel();
 
     await channel.assertQueue("transactions");

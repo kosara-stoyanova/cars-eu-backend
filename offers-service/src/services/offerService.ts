@@ -1,10 +1,11 @@
 import { nanoid } from "nanoid";
 import { CreateOfferData, Offer } from "../models/offerModel";
-import { readFileSync, writeFileSync } from "fs";
+import offersDataAccess from "../dataAccess/offersDataAccess";
+import { isEmpty, isNil } from "ramda";
 
-const offers: Offer[] = [
+const offersArray: Offer[] = [
   {
-    id: "ewLnVu8FS50p8MBm8fxP0",
+    _id: "ewLnVu8FS50p8MBm8fxP0",
     createdAt: 1680893515413,
     title: "Meh",
     description: "desc",
@@ -14,60 +15,86 @@ const offers: Offer[] = [
   },
 ];
 
-const getOffers = (): Offer[] => {
-  return offers;
-};
+const isNilOrEmpty = (value: any): value is null | undefined | [] | {} | "" =>
+  isNil(value) || isEmpty(value);
 
-const getOffer = (offerId: string): Offer | null => {
-  const data = offers.find((offer) => offer.id === offerId);
-  return data || null;
-};
-
-const createOffer = (data: CreateOfferData): Offer => {
-  const offer: Offer = {
-    id: nanoid(),
-    createdAt: Date.now(),
-    closed: false,
-    ...data,
+const offersService = () => {
+  const getOffers = async (): Promise<Offer[]> => {
+    const offers = await offersDataAccess().getOffers();
+    return offers;
   };
 
-  offers.push(offer);
+  const getOffer = async (offerId: string): Promise<Offer | null> => {
+    const offer = await offersDataAccess().getOffer(offerId);
 
-  return offer;
-};
+    if (offer === null) {
+      return null;
+    }
 
-const updateOffer = (
-  offerId: string,
-  updatedOffer: Partial<Offer>
-): Offer | null => {
-  const data = offers.find((offer) => offer.id === offerId);
-
-  if (!data) {
-    return null;
-  }
-
-  const newOffer: Offer = {
-    ...data,
-    ...updatedOffer,
+    return offer;
   };
 
-  const index = offers.indexOf(data);
-  offers[index] = newOffer;
+  const createOffer = async (data: CreateOfferData): Promise<Offer | null> => {
+    if (
+      isNilOrEmpty(data.author) ||
+      isNilOrEmpty(data.title) ||
+      isNilOrEmpty(data.description) ||
+      isNilOrEmpty(data.price)
+    ) {
+      throw Error("Data is missing!");
+    }
 
-  return newOffer;
+    const offerObject: Offer = {
+      _id: nanoid(),
+      createdAt: Date.now(),
+      closed: false,
+      ...data,
+    };
+
+    const offer = await offersDataAccess().createOffer(offerObject);
+
+    return offer;
+  };
+
+  const updateOffer = async (
+    offerId: string,
+    updatedOffer: Partial<Offer>
+  ): Promise<Offer | null> => {
+    const data = await getOffer(offerId);
+
+    if (!data) {
+      return null;
+    }
+
+    const updated: Offer = {
+      ...data,
+      ...updatedOffer,
+    };
+
+    const offer = await offersDataAccess().updateOffer(offerId, updated);
+
+    return offer;
+  };
+
+  const deleteOffer = async (offerId: string): Promise<boolean> => {
+    const data = await getOffer(offerId);
+
+    if (!data) {
+      return false;
+    }
+
+    const result = await offersDataAccess().deleteOffer(offerId);
+
+    return result;
+  };
+
+  return {
+    getOffers,
+    getOffer,
+    createOffer,
+    updateOffer,
+    deleteOffer,
+  };
 };
 
-const deleteOffer = (offerId: string): boolean => {
-  const data = offers.find((offer) => offer.id === offerId);
-
-  if (!data) {
-    return false;
-  }
-
-  const index = offers.indexOf(data);
-  offers.splice(index, 1);
-
-  return true;
-};
-
-export default { getOffers, getOffer, deleteOffer, updateOffer, createOffer };
+export default offersService;

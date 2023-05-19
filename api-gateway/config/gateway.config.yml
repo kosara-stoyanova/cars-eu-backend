@@ -1,0 +1,47 @@
+http:
+  port: 8080
+admin:
+  port: 9876
+  host: localhost
+apiEndpoints:
+  offers:
+    host: localhost
+    methods: ["POST", "GET", "PUT", "DELETE"]
+    paths: ["/offers/", "/offers/*"]
+  transactions:
+    host: localhost
+    methods: ["POST", "GET", "PUT", "DELETE"]
+    paths: ["/transactions/", "/transactions/*"]
+serviceEndpoints:
+  offersSrv:
+    url: "http://offers-service:8081"
+  transactionsSrv:
+    url: "http://transactions-service:8082"
+policies:
+  - cors
+  - expression
+  - log
+  - proxy
+  - rate-limit
+  - firebase-auth-policy
+pipelines:
+  - name: offers
+    apiEndpoints:
+      - offers
+    policies:
+      - firebase-auth-policy:
+          - action: allow
+      - proxy:
+          - action:
+              serviceEndpoint: offersSrv
+              changeOrigin: true
+  - name: transactions
+    apiEndpoints:
+      - transactions
+    policies:
+      - firebase-auth-policy:
+          - action: allow
+      - proxy:
+          - action:
+              serviceEndpoint: transactionsSrv
+              changeOrigin: true

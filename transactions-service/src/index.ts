@@ -1,12 +1,14 @@
 import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
 import router from "./routes/transactionRouter";
 import { connect } from "./services/messageBrokerService";
-
-dotenv.config();
+import config from "./config.js";
 
 const app: Express = express();
-const port = process.env.DEV_PORT;
+
+const port = config.PORT;
+const host = config.HOST;
+
+const mbUri = config.MB_URI;
 
 console.log("yey");
 
@@ -17,6 +19,6 @@ app.get("/", (req: Request, res: Response) => {
 app.use(router);
 
 app.listen(port, () => {
-  console.log(`⚡️[server]: Server started at port: http://localhost:${port}`);
-  connect();
+  console.log(`⚡️[server]: Server started at port: http://${host}:${port}`);
+  connect(mbUri);
 });
