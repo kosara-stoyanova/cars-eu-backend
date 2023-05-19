@@ -1,0 +1,20 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: ["develop"]
+  pull_request:
+    branches: ["develop"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Offers service
+        run: |
+          cd ./offers-service
+          npm run build
+      - name: Build Transactions service
+        run: |
+          cd ../transactions-service
+          npm run build
