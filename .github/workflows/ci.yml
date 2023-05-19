@@ -14,6 +14,7 @@ jobs:
       - name: Build Offers service
         run: |
           cd offers-service
+          npm i          
           npm run build
       - name: Build Transactions service
         run: |
