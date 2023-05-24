@@ -25,8 +25,8 @@ jobs:
         run: |
           cd offers-service
           gcloud auth configure-docker europe-west4-docker.pkg.dev
-          docker build -t europe-west4-docker.pkg.dev/cars-eu/offers-service:latest -f Dockerfile .
-          docker push europe-west4-docker.pkg.dev/cars-eu/offers-service:latest
+          docker build -t europe-west4-docker.pkg.dev/cars-eu/cars-eu/offers-service:latest -f Dockerfile .
+          docker push europe-west4-docker.pkg.dev/cars-eu/cars-eu/offers-service:latest
           gcloud components install kubectl
           gcloud container --project "cars-eu" clusters create-auto "cars-eu-offers-service" --region "europe-west4" --release-channel "regular" --network "projects/cars-eu/global/networks/default" --subnetwork "projects/cars-eu/regions/europe-west4/subnetworks/default" --cluster-ipv4-cidr "/17" --services-ipv4-cidr "/22"
           gcloud container clusters get-credentials cars-eu-offers-service --zone europe-west4
