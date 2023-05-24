@@ -3,7 +3,7 @@ import router from "./routes/offerRouter";
 import { connectMessageBroker } from "./services/messageBrokerService";
 import { run } from "./dataAccess/offersDataAccess";
 import { MongoClient, ServerApiVersion } from "mongodb";
-import config from "./config.js";
+import config from "./config";
 
 const app: Express = express();
 
@@ -52,3 +52,5 @@ process.on("SIGINT", () => {
       process.exit(1); // Exit the application with an error code
     });
 });
+
+export default app;

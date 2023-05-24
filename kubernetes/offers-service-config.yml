@@ -1,0 +1,62 @@
+---
+apiVersion: "v1"
+kind: "Namespace"
+metadata:
+  name: "cars-eu-offers-service"
+---
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: "cars-eu-offers-service-deployment-config-jhrq"
+  namespace: "cars-eu-offers-service"
+  labels:
+    app: "cars-eu-offers-service-deployment"
+data:
+  NODE_ENV: "prod"
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "cars-eu-offers-service-deployment"
+  namespace: "cars-eu-offers-service"
+  labels:
+    app: "cars-eu-offers-service-deployment"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "cars-eu-offers-service-deployment"
+  template:
+    metadata:
+      labels:
+        app: "cars-eu-offers-service-deployment"
+    spec:
+      containers:
+        - name: "offers-service-sha256-1"
+          image: "eu.gcr.io/cars-eu/offers-service@sha256:5ac64e403352cdf375629711b93665fe33ae772ffb196c810d9863e867884fa6"
+          env:
+            - name: "NODE_ENV"
+              valueFrom:
+                configMapKeyRef:
+                  key: "NODE_ENV"
+                  name: "cars-eu-offers-service-deployment-config-jhrq"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "cars-eu-offers-service-deployment-hpa-fk06"
+  namespace: "cars-eu-offers-service"
+  labels:
+    app: "cars-eu-offers-service-deployment"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "cars-eu-offers-service-deployment"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+    - type: "Resource"
+      resource:
+        name: "cpu"
+        targetAverageUtilization: 80

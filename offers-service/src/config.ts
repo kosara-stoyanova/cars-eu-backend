@@ -1,11 +1,11 @@
 import dotenv from "dotenv";
 import path from "path";
 
-const config = dotenv.config({
+dotenv.config({
   path: path.resolve(__dirname, `../.env.${process.env.NODE_ENV}`),
 });
 
-export default {
+const config = {
   NODE_ENV: process.env.NODE_ENV || "development",
   HOST: process.env.HOST || "localhost",
   PORT: process.env.PORT || 8081,
@@ -18,3 +18,5 @@ export default {
     process.env.MB_URI ||
     "amqps://obyqdmlr:5gTHLMWVaIp7di6ZzlAthZIyRqFf6KbA@kangaroo.rmq.cloudamqp.com/obyqdmlr",
 };
+
+export default config;
