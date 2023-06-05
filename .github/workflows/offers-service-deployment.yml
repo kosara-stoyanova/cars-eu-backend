@@ -25,8 +25,8 @@ jobs:
         run: |
           cd offers-service
           gcloud auth configure-docker eu.gcr.io
-          docker build -t eu.gcr.io/cars-eu/offers-service:latest -f Dockerfile .
-          docker push eu.gcr.io/cars-eu/offers-service:latest 
+          docker build -t eu.gcr.io/cars-eu/offers-service@sha256:5ac64e403352cdf375629711b93665fe33ae772ffb196c810d9863e867884fa6:latest -f Dockerfile .
+          docker push eu.gcr.io/cars-eu/offers-service@sha256:5ac64e403352cdf375629711b93665fe33ae772ffb196c810d9863e867884fa6:latest 
           gcloud components install kubectl
           gcloud container --project "cars-eu" clusters get-credentials cars-eu-cluster --zone europe-west4
           cd ../kubernetes
