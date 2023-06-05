@@ -24,9 +24,9 @@ jobs:
       - name: Configure Docker + apply Kubernetes
         run: |
           cd offers-service
-          gcloud auth configure-docker eu.gcr.io
-          docker build -t eu.gcr.io/cars-eu/offers-service:latest -f Dockerfile .
-          docker push eu.gcr.io/cars-eu/offers-service:latest 
+          gcloud auth configure-docker europe-west4-docker.pkg.dev
+          docker build -t europe-west4-docker.pkg.dev/cars-eu/cars-eu/offers-service:latest -f Dockerfile .
+          docker push europe-west4-docker.pkg.dev/cars-eu/cars-eu/offers-service:latest
           gcloud components install kubectl
           gcloud container --project "cars-eu" clusters get-credentials cars-eu-cluster --zone europe-west4
           cd ../kubernetes

@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
         - name: "offers-service-sha256-1"
-          image: "eu.gcr.io/cars-eu/offers-service:latest"
+          image: "europe-west4-docker.pkg.dev/cars-eu/cars-eu/offers-service:latest"
           env:
             - name: "NODE_ENV"
               valueFrom:
