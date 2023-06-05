@@ -1,10 +1,10 @@
 ---
-apiVersion: "v2"
+apiVersion: "v1"
 kind: "Namespace"
 metadata:
   name: "cars-eu-offers-service"
 ---
-apiVersion: "v2"
+apiVersion: "v1"
 kind: "ConfigMap"
 metadata:
   name: "cars-eu-offers-service-deployment-config-jhrq"
@@ -14,7 +14,7 @@ metadata:
 data:
   NODE_ENV: "prod"
 ---
-apiVersion: "apps/v2"
+apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "cars-eu-offers-service-deployment"
@@ -41,7 +41,7 @@ spec:
                   key: "NODE_ENV"
                   name: "cars-eu-offers-service-deployment-config-jhrq"
 ---
-apiVersion: "autoscaling/v2"
+apiVersion: "autoscaling/v1"
 kind: "HorizontalPodAutoscaler"
 metadata:
   name: "cars-eu-offers-service-deployment-hpa-fk06"
@@ -52,7 +52,7 @@ spec:
   scaleTargetRef:
     kind: "Deployment"
     name: "cars-eu-offers-service-deployment"
-    apiVersion: "apps/v2"
+    apiVersion: "apps/v1"
   minReplicas: 1
   maxReplicas: 5
   metrics:
