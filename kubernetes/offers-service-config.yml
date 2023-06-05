@@ -41,7 +41,7 @@ spec:
                   key: "NODE_ENV"
                   name: "cars-eu-offers-service-deployment-config-jhrq"
 ---
-apiVersion: "autoscaling/v2beta2"
+apiVersion: "autoscaling/v2"
 kind: "HorizontalPodAutoscaler"
 metadata:
   name: "cars-eu-offers-service-deployment-hpa-fk06"
@@ -59,6 +59,6 @@ spec:
     - type: "Resource"
       resource:
         name: "cpu"
-      target:
-        type: Utilization
-        averageUtilization: 70
+        target:
+          type: Utilization
+          averageUtilization: 70
