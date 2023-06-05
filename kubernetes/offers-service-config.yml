@@ -52,7 +52,7 @@ spec:
   scaleTargetRef:
     kind: "Deployment"
     name: "cars-eu-offers-service-deployment"
-    apiVersion: "apps/v1"
+    apiVersion: "apps/v2"
   minReplicas: 1
   maxReplicas: 5
   metrics:
