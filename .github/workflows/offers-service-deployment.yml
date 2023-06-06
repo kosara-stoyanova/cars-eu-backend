@@ -90,6 +90,7 @@ jobs:
           docker push europe-west4-docker.pkg.dev/cars-eu/cars-eu/offers-service:latest
 
       - name: Upload Kubernetes config
+        run: |
           gcloud components install kubectl
           gcloud container --project "cars-eu" clusters get-credentials cars-eu-cluster --zone europe-west4
           cd ../kubernetes
@@ -121,6 +122,7 @@ jobs:
           docker push europe-west4-docker.pkg.dev/cars-eu/cars-eu/transactions-service:latest
 
       - name: Upload Kubernetes config
+        run: |
           gcloud components install kubectl
           gcloud container --project "cars-eu" clusters get-credentials cars-eu-cluster --zone europe-west4
           cd ../kubernetes
