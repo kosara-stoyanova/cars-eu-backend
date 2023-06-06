@@ -23,6 +23,17 @@ jobs:
 
       - name: Configure Docker + apply Kubernetes
         run: |
+          cd api-gateway
+          gcloud auth configure-docker europe-west4-docker.pkg.dev
+          docker build -t europe-west4-docker.pkg.dev/cars-eu/cars-eu/api-gateway:latest -f Dockerfile .
+          docker push europe-west4-docker.pkg.dev/cars-eu/cars-eu/api-gateway:latest
+          gcloud components install kubectl
+          gcloud container --project "cars-eu" clusters get-credentials cars-eu-cluster --zone europe-west4
+          cd ../kubernetes
+          kubectl apply -f api-gateway-config.yml
+
+      - name: Configure Docker + apply Kubernetes
+        run: |
           cd offers-service
           gcloud auth configure-docker europe-west4-docker.pkg.dev
           docker build -t europe-west4-docker.pkg.dev/cars-eu/cars-eu/offers-service:latest -f Dockerfile .
@@ -31,3 +42,14 @@ jobs:
           gcloud container --project "cars-eu" clusters get-credentials cars-eu-cluster --zone europe-west4
           cd ../kubernetes
           kubectl apply -f offers-service-config.yml
+
+      - name: Configure Docker + apply Kubernetes
+        run: |
+          cd transactions-service
+          gcloud auth configure-docker europe-west4-docker.pkg.dev
+          docker build -t europe-west4-docker.pkg.dev/cars-eu/cars-eu/transactions-service:latest -f Dockerfile .
+          docker push europe-west4-docker.pkg.dev/cars-eu/cars-eu/transactions-service:latest
+          gcloud components install kubectl
+          gcloud container --project "cars-eu" clusters get-credentials cars-eu-cluster --zone europe-west4
+          cd ../kubernetes
+          kubectl apply -f transactions-service-config.yml
