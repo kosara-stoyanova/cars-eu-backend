@@ -48,8 +48,8 @@ jobs:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: |
           cd api-gateway
-          echo "$FIREBASE_SERVICE_ACCOUNT" > ./.serviceAccounts/service-account.base64
-          certutil -decode ./.serviceAccounts/service-account.base64 ./.serviceAccounts/service-account.json
+          echo "$FIREBASE_SERVICE_ACCOUNT" > .serviceAccounts/service-account.base64
+          certutil -decode .serviceAccounts/service-account.base64 .serviceAccounts/service-account.json
 
       - name: Configure Docker
         run: |
@@ -61,7 +61,7 @@ jobs:
         run: |
           gcloud components install kubectl
           gcloud container --project "cars-eu" clusters get-credentials cars-eu-cluster --zone europe-west4
-          cd ../kubernetes
+          cd kubernetes
           kubectl apply -f api-gateway-config.yml
 
   deploy-offers-service:
@@ -93,7 +93,7 @@ jobs:
         run: |
           gcloud components install kubectl
           gcloud container --project "cars-eu" clusters get-credentials cars-eu-cluster --zone europe-west4
-          cd ../kubernetes
+          cd kubernetes
           kubectl apply -f offers-service-config.yml
 
   deploy-transactions-service:
@@ -125,5 +125,5 @@ jobs:
         run: |
           gcloud components install kubectl
           gcloud container --project "cars-eu" clusters get-credentials cars-eu-cluster --zone europe-west4
-          cd ../kubernetes
+          cd kubernetes
           kubectl apply -f transactions-service-config.yml
