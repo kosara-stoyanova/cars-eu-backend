@@ -47,7 +47,7 @@ jobs:
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: |
-          cd api-gateway
+          mkdir -p $GITHUB_WORKSPACE/api-gateway/.serviceAccounts
           echo "$FIREBASE_SERVICE_ACCOUNT" > $GITHUB_WORKSPACE/api-gateway/.serviceAccounts/service-account.base64
           certutil -decode $GITHUB_WORKSPACE/api-gateway/.serviceAccounts/service-account.base64 $GITHUB_WORKSPACE/api-gateway/.serviceAccounts/service-account.json
 
