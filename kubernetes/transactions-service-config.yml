@@ -1,0 +1,64 @@
+---
+apiVersion: "v1"
+kind: "Namespace"
+metadata:
+  name: "cars-eu-transactions-service"
+---
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: "cars-eu-transactions-service-deployment-config-jhrq"
+  namespace: "cars-eu-transactions-service"
+  labels:
+    app: "cars-eu-transactions-service-deployment"
+data:
+  NODE_ENV: "prod"
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "cars-eu-transactions-service-deployment"
+  namespace: "cars-eu-transactions-service"
+  labels:
+    app: "cars-eu-transactions-service-deployment"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "cars-eu-transactions-service-deployment"
+  template:
+    metadata:
+      labels:
+        app: "cars-eu-transactions-service-deployment"
+    spec:
+      containers:
+        - name: "transactions-service-sha256-1"
+          image: "europe-west4-docker.pkg.dev/cars-eu/cars-eu/transactions-service:latest"
+          env:
+            - name: "NODE_ENV"
+              valueFrom:
+                configMapKeyRef:
+                  key: "NODE_ENV"
+                  name: "cars-eu-transactions-service-deployment-config-jhrq"
+---
+apiVersion: "autoscaling/v2"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "cars-eu-transactions-service-deployment-hpa-fk06"
+  namespace: "cars-eu-transactions-service"
+  labels:
+    app: "cars-eu-transactions-service-deployment"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "cars-eu-transactions-service-deployment"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+    - type: "Resource"
+      resource:
+        name: "cpu"
+        target:
+          type: Utilization
+          averageUtilization: 70
