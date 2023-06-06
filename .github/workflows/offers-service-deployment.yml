@@ -53,6 +53,7 @@ jobs:
 
       - name: Configure Docker
         run: |
+          cd api-gateway
           gcloud auth configure-docker europe-west4-docker.pkg.dev
           docker build -t europe-west4-docker.pkg.dev/cars-eu/cars-eu/api-gateway:latest -f Dockerfile .
           docker push europe-west4-docker.pkg.dev/cars-eu/cars-eu/api-gateway:latest
