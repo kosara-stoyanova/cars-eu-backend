@@ -48,8 +48,8 @@ jobs:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: |
           cd api-gateway
-          echo "$FIREBASE_SERVICE_ACCOUNT" > .serviceAccounts/service-account.base64
-          certutil -decode .serviceAccounts/service-account.base64 .serviceAccounts/service-account.json
+          echo "$FIREBASE_SERVICE_ACCOUNT" > $GITHUB_WORKSPACE/serviceAccounts/service-account.base64
+          certutil -decode $GITHUB_WORKSPACE/serviceAccounts/service-account.base64 $GITHUB_WORKSPACE/serviceAccounts/service-account.json
 
       - name: Configure Docker
         run: |
