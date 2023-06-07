@@ -2,13 +2,13 @@
 apiVersion: "v1"
 kind: "Namespace"
 metadata:
-  name: "cars-eu-api-gateway"
+  name: "cars-eu-namespace"
 ---
 apiVersion: "v1"
 kind: "ConfigMap"
 metadata:
   name: "cars-eu-api-gateway-deployment-config-jhrq"
-  namespace: "cars-eu-api-gateway"
+  namespace: "cars-eu-namespace"
   labels:
     app: "cars-eu-api-gateway-deployment"
 data:
@@ -18,7 +18,7 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "cars-eu-api-gateway-deployment"
-  namespace: "cars-eu-api-gateway"
+  namespace: "cars-eu-namespace"
   labels:
     app: "cars-eu-api-gateway-deployment"
 spec:
@@ -45,13 +45,13 @@ apiVersion: "autoscaling/v2"
 kind: "HorizontalPodAutoscaler"
 metadata:
   name: "cars-eu-api-gateway-deployment-hpa-fk06"
-  namespace: "cars-eu-api-gateway"
+  namespace: "cars-eu-namespace"
   labels:
     app: "cars-eu-api-gateway-deployment"
 spec:
   scaleTargetRef:
     kind: "Deployment"
-    name: "cars-eu-api-gateway-deployment"
+    name: "cars-eu-namespace"
     apiVersion: "apps/v1"
   minReplicas: 1
   maxReplicas: 5
@@ -67,7 +67,7 @@ apiVersion: "v1"
 kind: "Service"
 metadata:
   name: "cars-eu-api-gateway-deployment-service"
-  namespace: "cars-eu-api-gateway"
+  namespace: "cars-eu-namespace"
   labels:
     app: "cars-eu-api-gateway-deployment"
 spec:
