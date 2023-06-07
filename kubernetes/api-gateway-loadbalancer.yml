@@ -55,9 +55,9 @@ metadata:
   uid: 63578129-0bed-40a3-9eda-243f9da3ac72
 spec:
   allocateLoadBalancerNodePorts: true
-  clusterIP: 10.119.0.2
+  clusterIP: 10.119.0.4
   clusterIPs:
-    - 10.119.0.2
+    - 10.119.0.4
   externalTrafficPolicy: Cluster
   internalTrafficPolicy: Cluster
   ipFamilies:
