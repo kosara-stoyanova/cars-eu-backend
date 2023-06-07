@@ -11,7 +11,7 @@ firebaseAdmin.initializeApp({
 dotenv.config();
 
 if (process.env.NODE_ENV === "prod") {
-  gateway().load(path.join(__dirname, "config")).run();
-} else {
   gateway().load(path.join(__dirname, "config-prod")).run();
+} else {
+  gateway().load(path.join(__dirname, "config")).run();
 }
