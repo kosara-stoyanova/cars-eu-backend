@@ -62,3 +62,19 @@ spec:
         target:
           type: Utilization
           averageUtilization: 70
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "cars-eu-api-gateway-deployment-service"
+  namespace: "cars-eu-api-gateway"
+  labels:
+    app: "cars-eu-api-gateway-deployment"
+spec:
+  ports:
+    - protocol: "TCP"
+      port: 8080
+  selector:
+    app: "cars-eu-api-gateway-deployment"
+  type: "LoadBalancer"
+  loadBalancerIP: 34.90.128.82

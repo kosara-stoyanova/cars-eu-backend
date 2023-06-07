@@ -62,3 +62,19 @@ spec:
         target:
           type: Utilization
           averageUtilization: 70
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "cars-eu-offers-service-deployment-service"
+  namespace: "cars-eu-offers-service"
+  labels:
+    app: "cars-eu-offers-service-deployment"
+spec:
+  ports:
+    - protocol: "TCP"
+      port: 8081
+  selector:
+    app: "cars-eu-offers-service-deployment"
+  type: "LoadBalancer"
+  loadBalancerIP: ""
