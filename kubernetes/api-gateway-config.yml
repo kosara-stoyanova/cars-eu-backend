@@ -77,4 +77,4 @@ spec:
   selector:
     app: "cars-eu-api-gateway-deployment"
   type: "LoadBalancer"
-  loadBalancerIP: 34.90.128.82
+  loadBalancerIP: ""
