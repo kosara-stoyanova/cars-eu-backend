@@ -77,4 +77,4 @@ spec:
   selector:
     app: "cars-eu-transactions-service-deployment"
   type: "LoadBalancer"
-  loadBalancerIP: ""
+  loadBalancerIP: 35.204.175.92
