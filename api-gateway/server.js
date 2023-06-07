@@ -1,4 +1,5 @@
 const path = require("path");
+const dotenv = require("dotenv");
 const gateway = require("express-gateway");
 const firebaseAdmin = require("firebase-admin");
 const serviceAccount = require("./.serviceAccounts/service-account.json");
