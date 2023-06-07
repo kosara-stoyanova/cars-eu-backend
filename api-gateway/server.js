@@ -7,4 +7,10 @@ firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert(serviceAccount),
 });
 
-gateway().load(path.join(__dirname, "config")).run();
+dotenv.config();
+
+if (process.env.NODE_ENV === "prod") {
+  gateway().load(path.join(__dirname, "config")).run();
+} else {
+  gateway().load(path.join(__dirname, "config-prod")).run();
+}
