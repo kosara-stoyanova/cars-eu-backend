@@ -2,14 +2,14 @@ http:
   port: 8080
 admin:
   port: 9876
-  host: localhost
+  host: 0.0.0.0
 apiEndpoints:
   offers:
-    host: localhost
+    host: 0.0.0.0
     methods: ["POST", "GET", "PUT", "DELETE"]
     paths: ["/offers/", "/offers/*"]
   transactions:
-    host: localhost
+    host: 0.0.0.0
     methods: ["POST", "GET", "PUT", "DELETE"]
     paths: ["/transactions/", "/transactions/*"]
 serviceEndpoints:
