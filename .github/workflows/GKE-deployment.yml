@@ -63,7 +63,7 @@ jobs:
           gcloud components install kubectl
           gcloud container --project "cars-eu" clusters get-credentials cars-eu-cluster --zone europe-west4
           cd kubernetes
-          kubectl apply -f api-gateway-config.yml -f api-gateway-loadbalancer.yml
+          kubectl apply -f api-gateway-config.yml -f
 
   deploy-offers-service:
     needs: create-cluster
@@ -95,7 +95,7 @@ jobs:
           gcloud components install kubectl
           gcloud container --project "cars-eu" clusters get-credentials cars-eu-cluster --zone europe-west4
           cd kubernetes
-          kubectl apply -f offers-service-config.yml -f offers-service-loadbalancer.yml
+          kubectl apply -f offers-service-config.yml -f
 
   deploy-transactions-service:
     needs: create-cluster
@@ -127,4 +127,4 @@ jobs:
           gcloud components install kubectl
           gcloud container --project "cars-eu" clusters get-credentials cars-eu-cluster --zone europe-west4
           cd kubernetes
-          kubectl apply -f transactions-service-config.yml -f transactions-service-loadbalancer.yml
+          kubectl apply -f transactions-service-config.yml -f
