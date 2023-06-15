@@ -56,32 +56,32 @@ spec:
                   name: "cars-eu-offers-service-deployment-config-jhrq"
             - name: "HOST"
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: "HOST"
                   name: "cars-eu-offers-service-secrets"
             - name: "PORT"
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: "PORT"
                   name: "cars-eu-offers-service-secrets"
             - name: "DB_URI"
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: "DB_URI"
                   name: "cars-eu-offers-service-secrets"
             - name: "DB_NAME"
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: "DB_NAME"
                   name: "cars-eu-offers-service-secrets"
             - name: "DB_COLL_NAME"
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: "DB_COLL_NAME"
                   name: "cars-eu-offers-service-secrets"
             - name: "MB_URI"
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: "MB_URI"
                   name: "cars-eu-offers-service-secrets"
 ---
