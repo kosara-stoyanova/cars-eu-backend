@@ -13,10 +13,10 @@ type: Opaque
 data:
   HOST: IjM0LjkxLjU0Ljg5Ig==
   PORT: ODA4MQ==
-  DB_URI: Im1vbmdvZGIrc3J2Oi8vdXNlck9mZmVyczo4WjZHYmlieE9tWjlLc3VhQGNhcnMtZXUuc3hwem52My5tb25nb2RiLm5ldC8/cmV0cnlXcml0ZXM9dHJ1ZSZ3PW1ham9yaXR5Ig==
-  DB_NAME: Im9mZmVycy1kYXRhIg==
-  DB_COLL_NAME: Im9mZmVycyI=
-  MB_URI: ImFtcXBzOi8vb2J5cWRtbHI6NWdUSExNV1ZhSXA3ZGk2WnpsQXRoWkl5UnFGZjZLYkFAa2FuZ2Fyb28ucm1xLmNsb3VkYW1xcC5jb20vb2J5cWRtbHIi
+  DB_URI: bW9uZ29kYitzcnY6Ly91c2VyT2ZmZXJzOjhaNkdiaWJ4T21aOUtzdWFAY2Fycy1ldS5zeHB6bnYzLm1vbmdvZGIubmV0Lz9yZXRyeVdyaXRlcz10cnVlJnc9bWFqb3JpdHk=
+  DB_NAME: b2ZmZXJzLWRhdGE=
+  DB_COLL_NAME: b2ZmZXJz=
+  MB_URI: YW1xcHM6Ly9vYnlxZG1scjo1Z1RITE1XVmFJcDdkaTZaemxBdGhaSXlScUZmNktiQUBrYW5nYXJvby5ybXEuY2xvdWRhbXFwLmNvbS9vYnlxZG1scg==
 ---
 apiVersion: "v1"
 kind: "ConfigMap"
