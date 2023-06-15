@@ -19,6 +19,6 @@ export default {
   NODE_ENV: process.env.NODE_ENV || "dev",
   HOST: process.env.HOST || "localhost",
   PORT: process.env.PORT || 8082,
-  DB_URL: process.env.DB_URL || "",
+  DB_URL: process.env.DATABASE_URL || "",
   MB_URI: process.env.MB_URI || "",
 };
