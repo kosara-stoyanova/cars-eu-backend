@@ -47,31 +47,31 @@ spec:
         - name: "transactions-service-sha256-1"
           image: "europe-west4-docker.pkg.dev/cars-eu/cars-eu/transactions-service:latest"
           env:
-            - name: "NODE_ENV"
+            - name: NODE_ENV
               valueFrom:
                 configMapKeyRef:
-                  key: "NODE_ENV"
-                  name: "cars-eu-transactions-service-deployment-config-jhrq"
-            - name: "HOST"
+                  key: NODE_ENV
+                  name: cars-eu-transactions-service-deployment-config-jhrq
+            - name: HOST
               valueFrom:
                 configMapKeyRef:
-                  key: "HOST"
-                  name: "cars-eu-transactions-service-secrets"
-            - name: "PORT"
+                  key: HOST
+                  name: cars-eu-transactions-service-secrets
+            - name: PORT
               valueFrom:
                 configMapKeyRef:
-                  key: "PORT"
-                  name: "cars-eu-transactions-service-secrets"
-            - name: "DATABASE_URL"
+                  key: PORT
+                  name: cars-eu-transactions-service-secrets
+            - name: DATABASE_URL
               valueFrom:
                 configMapKeyRef:
-                  key: "DATABASE_URL"
-                  name: "cars-eu-transactions-service-secrets"
-            - name: "MB_URI"
+                  name: cars-eu-transactions-service-secrets
+                  key: DATABASE_URL
+            - name: MB_URI
               valueFrom:
                 configMapKeyRef:
-                  key: "MB_URI"
-                  name: "cars-eu-transactions-service-secrets"
+                  name: cars-eu-transactions-service-secrets
+                  key: MB_URI
 ---
 apiVersion: "autoscaling/v2"
 kind: "HorizontalPodAutoscaler"
