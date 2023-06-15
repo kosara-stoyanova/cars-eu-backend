@@ -1,23 +1,19 @@
 import dotenv from "dotenv";
 import path from "path";
 
-dotenv.config({
-  path: path.resolve(__dirname, `../.env`),
-});
+// dotenv.config({
+//   path: path.resolve(__dirname, `../.env`),
+// });
 
-// console.log(process.env.NODE_ENV);
+console.log(process.env.NODE_ENV);
 
-// if (process.env.NODE_ENV !== "prod") {
-//   dotenv.config({
-//     path: path.resolve(__dirname, `../.env`),
-//   });
-// }
-
-// else {
-//   dotenv.config({
-//     path: path.resolve(__dirname, `../.env.dev`),
-//   });
-// }
+if (process.env.NODE_ENV !== "prod") {
+  dotenv.config({
+    path: path.resolve(__dirname, `../.env`),
+  });
+} else {
+  dotenv.config();
+}
 
 export default {
   NODE_ENV: process.env.NODE_ENV || "dev",
