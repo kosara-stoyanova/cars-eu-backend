@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: ["develop"]
+    branches: ["develop", "master"]
   pull_request:
-    branches: ["develop"]
+    branches: ["develop", "master"]
 
 jobs:
   build:
@@ -25,6 +25,7 @@ jobs:
         env:
           NODE_ENV: dev
         run: docker-compose build
+
   test:
     runs-on: ubuntu-latest
     steps:

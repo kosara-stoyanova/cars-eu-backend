@@ -3,20 +3,21 @@ http:
 admin:
   port: 9876
   host: localhost
+
 apiEndpoints:
   offers:
     host: localhost
-    methods: ["POST", "GET", "PUT", "DELETE"]
     paths: ["/offers/", "/offers/*"]
   transactions:
     host: localhost
-    methods: ["POST", "GET", "PUT", "DELETE"]
     paths: ["/transactions/", "/transactions/*"]
+
 serviceEndpoints:
   offersSrv:
     url: "http://offers-service:8081"
   transactionsSrv:
     url: "http://transactions-service:8082"
+
 policies:
   - cors
   - expression
@@ -24,21 +25,73 @@ policies:
   - proxy
   - rate-limit
   - firebase-auth-policy
+
 pipelines:
   - name: offers
     apiEndpoints:
       - offers
     policies:
+      - cors:
+          - action:
+              origin: "*"
+              methods: "*"
+              allowedHeaders:
+                [
+                  "Content-type",
+                  "Authorization",
+                  "Origin",
+                  "Access-Control-Allow-Origin",
+                  "Accept",
+                  "Options",
+                  "X-Requested-With",
+                ]
+              exposedHeaders:
+                [
+                  "Content-type",
+                  "Authorization",
+                  "Origin",
+                  "Access-Control-Allow-Origin",
+                  "Accept",
+                  "Options",
+                  "X-Requested-With",
+                ]
+              optionsSuccessStatus: 204
       - firebase-auth-policy:
           - action: allow
       - proxy:
           - action:
               serviceEndpoint: offersSrv
               changeOrigin: true
+
   - name: transactions
     apiEndpoints:
       - transactions
     policies:
+      - cors:
+          - action:
+              origin: "*"
+              methods: "*"
+              allowedHeaders:
+                [
+                  "Content-type",
+                  "Authorization",
+                  "Origin",
+                  "Access-Control-Allow-Origin",
+                  "Accept",
+                  "Options",
+                  "X-Requested-With",
+                ]
+              exposedHeaders:
+                [
+                  "Content-type",
+                  "Authorization",
+                  "Origin",
+                  "Access-Control-Allow-Origin",
+                  "Accept",
+                  "Options",
+                  "X-Requested-With",
+                ]
+              optionsSuccessStatus: 204
       - firebase-auth-policy:
           - action: allow
       - proxy:

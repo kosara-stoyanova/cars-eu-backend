@@ -28,9 +28,9 @@ services:
     ports:
       - "8081:8081"
     image: offers-service
-    env_file:
-      - ./offers-service/.env.${NODE_ENV}
-    command: sh -c "npm run ${NODE_ENV}"
+    # env_file:
+    #   - ./offers-service/.env.${NODE_ENV}
+    command: sh -c "npm run start"
     restart: on-failure
     # depends_on:
     #   rabbitmq:
@@ -62,9 +62,9 @@ services:
     ports:
       - "8082:8082"
     image: transactions-service
-    env_file:
-      - ./transactions-service/.env.${NODE_ENV}
-    command: sh -c "npm run ${NODE_ENV}"
+    # env_file:
+    #   - ./transactions-service/.env.${NODE_ENV}
+    command: sh -c "npm run start"
     restart: on-failure
     # depends_on:
     #   rabbitmq:

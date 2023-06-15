@@ -4,11 +4,11 @@ const gateway = require("express-gateway");
 const firebaseAdmin = require("firebase-admin");
 const serviceAccount = require("./.serviceAccounts/service-account.json");
 
+dotenv.config();
+
 firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert(serviceAccount),
 });
-
-dotenv.config();
 
 if (process.env.NODE_ENV === "prod") {
   console.log("production");

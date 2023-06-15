@@ -4,6 +4,7 @@ import { connectMessageBroker } from "./services/messageBrokerService";
 import { run } from "./dataAccess/offersDataAccess";
 import { MongoClient, ServerApiVersion } from "mongodb";
 import config from "./config";
+import cors from "cors";
 
 const app: Express = express();
 
@@ -24,11 +25,26 @@ const client = new MongoClient(dbUri, {
 const dbName = config.DB_NAME;
 const collName = config.DB_COLL_NAME;
 
+// app.options("/offers", (req, res) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Methods", "HEAD, PUT, PATCH, POST, DELETE");
+//   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//   res.sendStatus(200);
+// });
+
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+app.use(router);
+
 app.get("/", (req: Request, res: Response) => {
   res.redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
 });
-
-app.use(router);
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server started at port: http://${host}:${port}`);

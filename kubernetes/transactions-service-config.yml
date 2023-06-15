@@ -4,6 +4,18 @@ kind: "Namespace"
 metadata:
   name: "cars-eu-namespace"
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cars-eu-transactions-service-secrets
+  namespace: "cars-eu-namespace"
+type: Opaque
+data:
+  HOST: IjM1LjIwNC4xNzUuOTIi
+  PORT: ODA4Mg==
+  DATABASE_URL: J215c3FsOi8veWwzZHJmMHN3NzVibmNieGJjOHM6cHNjYWxlX3B3X3ZKNExYSWNtc2hYb2MxdDRZUXJYU1d6TXJ4dE81ZmpDT2tXS1QzcmxWbjdAYXdzLmNvbm5lY3QucHNkYi5jbG91ZC9jYXJzLWV1LXRyYW5zYWN0aW9ucz9zc2w9eyJyZWplY3RVbmF1dGhvcml6ZWQiOnRydWV9Jw==
+  MB_URI: ImFtcXBzOi8vb2J5cWRtbHI6NWdUSExNV1ZhSXA3ZGk2WnpsQXRoWkl5UnFGZjZLYkFAa2FuZ2Fyb28ucm1xLmNsb3VkYW1xcC5jb20vb2J5cWRtbHIi
+---
 apiVersion: "v1"
 kind: "ConfigMap"
 metadata:
@@ -40,6 +52,26 @@ spec:
                 configMapKeyRef:
                   key: "NODE_ENV"
                   name: "cars-eu-transactions-service-deployment-config-jhrq"
+            - name: "HOST"
+              valueFrom:
+                configMapKeyRef:
+                  key: "HOST"
+                  name: "cars-eu-transactions-service-secrets"
+            - name: "PORT"
+              valueFrom:
+                configMapKeyRef:
+                  key: "PORT"
+                  name: "cars-eu-transactions-service-secrets"
+            - name: "DATABASE_URL"
+              valueFrom:
+                configMapKeyRef:
+                  key: "DATABASE_URL"
+                  name: "cars-eu-transactions-service-secrets"
+            - name: "MB_URI"
+              valueFrom:
+                configMapKeyRef:
+                  key: "MB_URI"
+                  name: "cars-eu-transactions-service-secrets"
 ---
 apiVersion: "autoscaling/v2"
 kind: "HorizontalPodAutoscaler"

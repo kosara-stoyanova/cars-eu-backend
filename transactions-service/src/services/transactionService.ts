@@ -1,115 +1,146 @@
 import { nanoid } from "nanoid";
 import { CreateTransactionData, Transaction } from "../models/transactionModel";
 import { sendTransaction } from "./messageBrokerService";
+import transactionsDataAccess from "../dataAccess/transactionsDataAccess";
+import { isEmpty, isNil } from "ramda";
 
-const transactions: Transaction[] = [
-  {
-    id: "ewLnVu8FS50p8MBm8fxP0",
-    offerId: "yes",
-    title: "Transaction",
-    description: "Transaction desc",
-    amount: 500,
-    sender: "Me",
-    recipient: "You",
-    createdAt: 1680893515413,
-  },
-];
+// const transactionsArray: Transaction[] = [
+//   {
+//     id: "ewLnVu8FS50p8MBm8fxP0",
+//     offerId: "yes",
+//     title: "Transaction",
+//     description: "Transaction desc",
+//     amount: 500,
+//     sender: "Me",
+//     recipient: "You",
+//     createdAt: 1680893515413,
+//   },
+// ];
 
-const getTransactions = (): Transaction[] => {
-  return transactions;
-};
+const isNilOrEmpty = (value: any): value is null | undefined | [] | {} | "" =>
+  isNil(value) || isEmpty(value);
 
-const getTransaction = (transactionId: string): Transaction | null => {
-  const data = transactions.find(
-    (transaction) => transaction.id === transactionId
-  );
-  return data || null;
-};
-
-const createTransaction = (data: CreateTransactionData): Transaction => {
-  const transaction: Transaction = {
-    id: nanoid(),
-    createdAt: Date.now(),
-    ...data,
+const transactionsService = () => {
+  const getTransactions = async (): Promise<Transaction[] | null> => {
+    const transactions = await transactionsDataAccess().getTransactions();
+    return transactions;
   };
 
-  transactions.push(transaction);
+  const getTransaction = async (
+    transactionId: string
+  ): Promise<Transaction | null> => {
+    const transaction = await transactionsDataAccess().getTransaction(
+      transactionId
+    );
 
-  return transaction;
-};
+    if (transaction === null) {
+      return null;
+    }
 
-const updateTransaction = (
-  transactionId: string,
-  updatedTransaction: Partial<Transaction>
-): Transaction | null => {
-  const data = transactions.find(
-    (transaction) => transaction.id === transactionId
-  );
-
-  if (!data) {
-    return null;
-  }
-
-  const newTransaction: Transaction = {
-    ...data,
-    ...updatedTransaction,
+    return transaction;
   };
 
-  const index = transactions.indexOf(data);
-  transactions[index] = newTransaction;
+  const createTransaction = async (
+    data: CreateTransactionData
+  ): Promise<Transaction | null> => {
+    if (
+      isNilOrEmpty(data.offerId) ||
+      isNilOrEmpty(data.title) ||
+      isNilOrEmpty(data.description) ||
+      isNilOrEmpty(data.amount) ||
+      isNilOrEmpty(data.recipient) ||
+      isNilOrEmpty(data.sender)
+    ) {
+      throw Error("Data is missing!");
+    }
 
-  return newTransaction;
-};
+    const transactionObject: Transaction = {
+      id: nanoid(),
+      createdAt: Date.now(),
+      success: false,
+      ...data,
+    };
 
-const deleteTransaction = (transactionId: string): boolean => {
-  const data = transactions.find(
-    (transaction) => transaction.id === transactionId
-  );
+    const transaction = await transactionsDataAccess().createTransaction(
+      transactionObject
+    );
 
-  if (!data) {
-    return false;
-  }
-
-  const index = transactions.indexOf(data);
-  transactions.splice(index, 1);
-
-  return true;
-};
-
-const completeTransaction = (
-  transactionId: string,
-  success: boolean
-): Transaction | null => {
-  const data = transactions.find(
-    (transaction) => transaction.id === transactionId
-  );
-  console.log(data);
-
-  if (!data) {
-    return null;
-  }
-
-  const completedTransaction: Transaction = {
-    ...data,
-    success,
+    return transaction;
   };
-  console.log(completedTransaction);
 
-  const index = transactions.indexOf(data);
-  transactions[index] = completedTransaction;
+  const updateTransaction = async (
+    transactionId: string,
+    updatedTransaction: Partial<Transaction>
+  ): Promise<Transaction | null> => {
+    const data = await getTransaction(transactionId);
 
-  sendTransaction({
-    ...completedTransaction,
-  });
+    if (!data) {
+      return null;
+    }
 
-  return completedTransaction;
+    const updated: Transaction = {
+      ...data,
+      ...updatedTransaction,
+    };
+
+    const newTransaction = await transactionsDataAccess().updateTransaction(
+      transactionId,
+      updated
+    );
+
+    return newTransaction;
+  };
+
+  const deleteTransaction = async (transactionId: string): Promise<boolean> => {
+    const data = await getTransaction(transactionId);
+
+    if (!data) {
+      return false;
+    }
+
+    const result = await transactionsDataAccess().deleteTransaction(
+      transactionId
+    );
+
+    return true;
+  };
+
+  const completeTransaction = async (
+    transactionId: string,
+    success: boolean
+  ): Promise<Transaction | null> => {
+    const data = await getTransaction(transactionId);
+    console.log(data);
+
+    if (!data) {
+      return null;
+    }
+
+    const completedTransaction: Transaction = {
+      ...data,
+      success,
+    };
+    console.log(completedTransaction);
+
+    await transactionsDataAccess().updateTransaction(
+      transactionId,
+      completedTransaction
+    );
+
+    sendTransaction({
+      ...completedTransaction,
+    });
+
+    return completedTransaction;
+  };
+
+  return {
+    getTransactions,
+    getTransaction,
+    createTransaction,
+    updateTransaction,
+    deleteTransaction,
+    completeTransaction,
+  };
 };
-
-export default {
-  getTransactions,
-  getTransaction,
-  deleteTransaction,
-  updateTransaction,
-  createTransaction,
-  completeTransaction,
-};
+export default transactionsService;

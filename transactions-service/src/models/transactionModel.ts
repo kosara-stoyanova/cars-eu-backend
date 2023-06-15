@@ -8,7 +8,6 @@ export interface Transaction {
   recipient: string;
   createdAt: number;
   success?: boolean;
-  updatedAt?: number;
 }
 
 export type CreateTransactionData = Pick<
