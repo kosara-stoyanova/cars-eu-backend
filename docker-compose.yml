@@ -29,7 +29,7 @@ services:
       - "8081:8081"
     image: offers-service
     # env_file:
-    #   - ./offers-service/.env.${NODE_ENV}
+    #   - ./offers-service/.env
     command: sh -c "npm run start"
     restart: on-failure
     # depends_on:
@@ -62,8 +62,8 @@ services:
     ports:
       - "8082:8082"
     image: transactions-service
-    # env_file:
-    #   - ./transactions-service/.env.${NODE_ENV}
+    env_file:
+      - ./transactions-service/.env
     command: sh -c "npm run start"
     restart: on-failure
     # depends_on:
