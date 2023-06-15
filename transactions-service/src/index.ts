@@ -13,7 +13,11 @@ const host = config.HOST;
 const dbUrl = config.DB_URL;
 const mbUri = config.MB_URI;
 
-console.log("yey");
+console.log(config.NODE_ENV);
+console.log(config.PORT);
+console.log(config.HOST);
+console.log(config.DB_URL);
+console.log(config.MB_URI);
 
 app.get("/", (req: Request, res: Response) => {
   res.redirect("https://www.youtube.com/watch?v=rs6Y4kZ8qtw");
