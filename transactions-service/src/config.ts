@@ -7,7 +7,7 @@ import path from "path";
 
 console.log(process.env.NODE_ENV);
 
-if (process.env.NODE_ENV !== "prod") {
+if (process.env.NODE_ENV === "dev") {
   dotenv.config({
     path: path.resolve(__dirname, `../.env`),
   });
