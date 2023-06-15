@@ -49,41 +49,41 @@ spec:
         - name: "offers-service-sha256-1"
           image: "europe-west4-docker.pkg.dev/cars-eu/cars-eu/offers-service:latest"
           env:
-            - name: "NODE_ENV"
+            - name: NODE_ENV
               valueFrom:
                 configMapKeyRef:
-                  key: "NODE_ENV"
-                  name: "cars-eu-offers-service-deployment-config-jhrq"
-            - name: "HOST"
+                  key: NODE_ENV
+                  name: cars-eu-offers-service-deployment-config-jhrq
+            - name: HOST
               valueFrom:
                 secretKeyRef:
-                  key: "HOST"
-                  name: "cars-eu-offers-service-secrets"
-            - name: "PORT"
+                  key: HOST
+                  name: cars-eu-offers-service-secrets
+            - name: PORT
               valueFrom:
                 secretKeyRef:
-                  key: "PORT"
-                  name: "cars-eu-offers-service-secrets"
-            - name: "DB_URI"
+                  key: PORT
+                  name: cars-eu-offers-service-secrets
+            - name: DB_URI
               valueFrom:
                 secretKeyRef:
-                  key: "DB_URI"
-                  name: "cars-eu-offers-service-secrets"
-            - name: "DB_NAME"
+                  key: DB_URI
+                  name: cars-eu-offers-service-secrets
+            - name: DB_NAME
               valueFrom:
                 secretKeyRef:
-                  key: "DB_NAME"
-                  name: "cars-eu-offers-service-secrets"
-            - name: "DB_COLL_NAME"
+                  key: DB_NAME
+                  name: cars-eu-offers-service-secrets
+            - name: DB_COLL_NAME
               valueFrom:
                 secretKeyRef:
-                  key: "DB_COLL_NAME"
-                  name: "cars-eu-offers-service-secrets"
-            - name: "MB_URI"
+                  key: DB_COLL_NAME
+                  name: cars-eu-offers-service-secrets
+            - name: MB_URI
               valueFrom:
                 secretKeyRef:
-                  key: "MB_URI"
-                  name: "cars-eu-offers-service-secrets"
+                  key: MB_URI
+                  name: cars-eu-offers-service-secrets
 ---
 apiVersion: "autoscaling/v2"
 kind: "HorizontalPodAutoscaler"
