@@ -19,7 +19,7 @@
     "express-gateway": "^1.16.11",
     "firebase": "^9.20.0",
     "helm": "^0.2.1",
-    "nanoid": "^3.0.0"
+    "nanoid": "^3.1.31"
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
