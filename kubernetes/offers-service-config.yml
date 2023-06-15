@@ -15,7 +15,7 @@ data:
   PORT: ODA4MQ==
   DB_URI: bW9uZ29kYitzcnY6Ly91c2VyT2ZmZXJzOjhaNkdiaWJ4T21aOUtzdWFAY2Fycy1ldS5zeHB6bnYzLm1vbmdvZGIubmV0Lz9yZXRyeVdyaXRlcz10cnVlJnc9bWFqb3JpdHk=
   DB_NAME: b2ZmZXJzLWRhdGE=
-  DB_COLL_NAME: b2ZmZXJz=
+  DB_COLL_NAME: b2ZmZXJz
   MB_URI: YW1xcHM6Ly9vYnlxZG1scjo1Z1RITE1XVmFJcDdkaTZaemxBdGhaSXlScUZmNktiQUBrYW5nYXJvby5ybXEuY2xvdWRhbXFwLmNvbS9vYnlxZG1scg==
 ---
 apiVersion: "v1"
