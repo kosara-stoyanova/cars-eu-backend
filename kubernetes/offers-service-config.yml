@@ -11,7 +11,7 @@ metadata:
   namespace: "cars-eu-namespace"
 type: Opaque
 data:
-  HOST: IjM0LjkxLjU0Ljg5Ig==
+  HOST: MzQuOTEuNTQuODk=
   PORT: ODA4MQ==
   DB_URI: bW9uZ29kYitzcnY6Ly91c2VyT2ZmZXJzOjhaNkdiaWJ4T21aOUtzdWFAY2Fycy1ldS5zeHB6bnYzLm1vbmdvZGIubmV0Lz9yZXRyeVdyaXRlcz10cnVlJnc9bWFqb3JpdHk=
   DB_NAME: b2ZmZXJzLWRhdGE=
