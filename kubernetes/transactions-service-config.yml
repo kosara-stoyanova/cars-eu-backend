@@ -54,22 +54,22 @@ spec:
                   name: cars-eu-transactions-service-deployment-config-jhrq
             - name: HOST
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: HOST
                   name: cars-eu-transactions-service-secrets
             - name: PORT
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: PORT
                   name: cars-eu-transactions-service-secrets
             - name: DATABASE_URL
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: cars-eu-transactions-service-secrets
                   key: DATABASE_URL
             - name: MB_URI
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: cars-eu-transactions-service-secrets
                   key: MB_URI
 ---
